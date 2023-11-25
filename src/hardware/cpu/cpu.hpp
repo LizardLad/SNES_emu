@@ -4,6 +4,16 @@
 #include <cstdint>
 #include <string>
 
+struct CPU_65C816_Accumulator_substructure {
+	std::uint8_t A;
+	std::uint8_t B;
+};
+
+union CPU_65C816_Accumulator{
+	struct CPU_65C816_Accumulator_substructure bytes;
+	std::uint16_t val
+};
+
 typedef enum {
 	BREAK,
 	CARRY,
@@ -30,8 +40,10 @@ typedef struct {
 
 typedef struct {
 	std::uint8_t opcode;
+	void CPU_65C816::*impl(void) 
 #ifdef DEBUG
 	std::string name;
+	std::string mnemonic;
 #endif
 } INSTRUCTION_T;
 

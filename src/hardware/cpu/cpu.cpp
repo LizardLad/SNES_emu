@@ -2,10 +2,10 @@
 
 #include <cpu.hpp>
 
-class CPU {
+class CPU_65C816 {
 private:
 	//Registers (http://www.6502.org/tutorials/65c816opcodes.html#4)
-	std::uint16_t A; //The accumulator. This is the math register. It stores one of two operands or the result of most arithmetic and logical operations.
+	union CPU_65C816_Accumulator A; //The accumulator. This is the math register. It stores one of two operands or the result of most arithmetic and logical operations.
 	std::uint8_t DB; //Data bank register, holds the default bank for memory transfers (DBR / DB)
 	std::uint16_t D; //Direct page register, used for direct page addressing modes. Holds the memory bank address of the data the CPU is accessing. (D/DP)
 	std::uint8_t B; //Program Bank, holds the bank address of all instruction fetches.

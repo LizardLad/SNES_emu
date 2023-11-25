@@ -118,198 +118,195 @@ print(byte_counts)
 
 for idx, instruction in enumerate(raw_instruction_information):
 	name = ""
-	if(instruction['opcode'] == "ADC"):
+	if(instruction['mnemonic'] == "ADC"):
 		name = "Add with carry"
-	elif(instruction['opcode'] == "SBC"):
+	elif(instruction['mnemonic'] == "SBC"):
 		name = "Subtract with carry"
-	elif(instruction['opcode'] == "CMP"):
+	elif(instruction['mnemonic'] == "CMP"):
 		name = "Compare to accumulator"
-	elif(instruction['opcode'] == "CMX"):
+	elif(instruction['mnemonic'] == "CMX"):
 		name = "Compare to X"
-	elif(instruction['opcode'] == "CMY"):
+	elif(instruction['mnemonic'] == "CMY"):
 		name = "Compare to Y"
-	elif(instruction['opcode'] == "DEC"):
+	elif(instruction['mnemonic'] == "DEC"):
 		name = "Decrement accumulator"
-	elif(instruction['opcode'] == "DEX"):
+	elif(instruction['mnemonic'] == "DEX"):
 		name = "Decrement X"
-	elif(instruction['opcode'] == "DEY"):
+	elif(instruction['mnemonic'] == "DEY"):
 		name = "Decrement Y"
-	elif(instruction['opcode'] == "INC"):
+	elif(instruction['mnemonic'] == "INC"):
 		name = "Increment accumulator"
-	elif(instruction['opcode'] == "INX"):
+	elif(instruction['mnemonic'] == "INX"):
 		name = "Increment X"
-	elif(instruction['opcode'] == "INY"):
+	elif(instruction['mnemonic'] == "INY"):
 		name = "Increment Y"
-	elif(instruction['opcode'] == "AND"):
+	elif(instruction['mnemonic'] == "AND"):
 		name = "Bitwise AND with accumulator"
-	elif(instruction['opcode'] == "EOR"):
+	elif(instruction['mnemonic'] == "EOR"):
 		name = "Exclusive OR with accumulator"
-	elif(instruction['opcode'] == "ORA"):
+	elif(instruction['mnemonic'] == "ORA"):
 		name = "Bitwise OR with accumulator"
-	elif(instruction['opcode'] == "BIT"):
+	elif(instruction['mnemonic'] == "BIT"):
 		name = "Test BITs"
-	elif(instruction['opcode'] == "TRB"):
+	elif(instruction['mnemonic'] == "TRB"):
 		name = "Test and Reset Bits"
-	elif(instruction['opcode'] == "TSB"):
+	elif(instruction['mnemonic'] == "TSB"):
 		name = "Test and Set Bits"
-	elif(instruction['opcode'] == "ASL"):
-		name = ""
-	elif(instruction['opcode'] == "LSR"):
-		name = ""
-	elif(instruction['opcode'] == "ROL"):
-		name = ""
-	elif(instruction['opcode'] == "ROR"):
-		name = ""
-	elif(instruction['opcode'] == "BCC"):
-		name = ""
-	elif(instruction['opcode'] == "BCS"):
-		name = ""
-	elif(instruction['opcode'] == "BEQ"):
-		name = ""
-	elif(instruction['opcode'] == "BMI"):
-		name = ""
-	elif(instruction['opcode'] == "BNE"):
-		name = ""
-	elif(instruction['opcode'] == "BPL"):
-		name = ""
-	elif(instruction['opcode'] == "BRA"):
-		name = ""
-	elif(instruction['opcode'] == "BVC"):
-		name = ""
-	elif(instruction['opcode'] == "BVS"):
-		name = ""
-	elif(instruction['opcode'] == "BRL"):
-		name = ""
-	elif(instruction['opcode'] == "JMP"):
-		name = ""
-	elif(instruction['opcode'] == "JSL"):
-		name = ""
-	elif(instruction['opcode'] == "JSR"):
-		name = ""
-	elif(instruction['opcode'] == "RTL"):
-		name = ""
-	elif(instruction['opcode'] == "RTS"):
-		name = ""
-	elif(instruction['opcode'] == "BRK"):
-		name = ""
-	elif(instruction['opcode'] == "COP"):
-		name = ""
-	elif(instruction['opcode'] == "RTI"):
-		name = ""
-	elif(instruction['opcode'] == "CLC"):
-		name = ""
-	elif(instruction['opcode'] == "CLD"):
-		name = ""
-	elif(instruction['opcode'] == "CLI"):
-		name = ""
-	elif(instruction['opcode'] == "CLV"):
-		name = ""
-	elif(instruction['opcode'] == "SEV"):
-		name = ""
-	elif(instruction['opcode'] == "SED"):
-		name = ""
-	elif(instruction['opcode'] == "SEI"):
-		name = ""
-	elif(instruction['opcode'] == "REP"):
-		name = ""
-	elif(instruction['opcode'] == "SEP"):
-		name = ""
-	elif(instruction['opcode'] == "LDA"):
-		name = ""
-	elif(instruction['opcode'] == "LDX"):
-		name = ""
-	elif(instruction['opcode'] == "LDY"):
-		name = ""
-	elif(instruction['opcode'] == "STA"):
-		name = ""
-	elif(instruction['opcode'] == "STX"):
-		name = ""
-	elif(instruction['opcode'] == "STY"):
-		name = ""
-	elif(instruction['opcode'] == "STZ"):
-		name = ""
-	elif(instruction['opcode'] == "MVN"):
-		name = ""
-	elif(instruction['opcode'] == "MVP"):
-		name = ""
-	elif(instruction['opcode'] == "NOP"):
-		name = ""
-	elif(instruction['opcode'] == "WDM"):
-		name = ""
-	elif(instruction['opcode'] == "PEA"):
-		name = ""
-	elif(instruction['opcode'] == "PEI"):
-		name = ""
-	elif(instruction['opcode'] == "PER"):
-		name = ""
-	elif(instruction['opcode'] == "PHA"):
-		name = ""
-	elif(instruction['opcode'] == "PHX"):
-		name = ""
-	elif(instruction['opcode'] == "PHY"):
-		name = ""
-	elif(instruction['opcode'] == "PLA"):
-		name = ""
-	elif(instruction['opcode'] == "PLX"):
-		name = ""
-	elif(instruction['opcode'] == "PLY"):
-		name = ""
-	elif(instruction['opcode'] == "PHB"):
-		name = ""
-	elif(instruction['opcode'] == "PHD"):
-		name = ""
-	elif(instruction['opcode'] == "PHK"):
-		name = ""
-	elif(instruction['opcode'] == "PHP"):
-		name = ""
-	elif(instruction['opcode'] == "PLB"):
-		name = ""
-	elif(instruction['opcode'] == "PLD"):
-		name = ""
-	elif(instruction['opcode'] == "PLP"):
-		name = ""
-	elif(instruction['opcode'] == "STP"):
-		name = ""
-	elif(instruction['opcode'] == "WAI"):
-		name = ""
-	elif(instruction['opcode'] == "TAX"):
-		name = ""
-	elif(instruction['opcode'] == "TAY"):
-		name = ""
-	elif(instruction['opcode'] == "TSX"):
-		name = ""
-	elif(instruction['opcode'] == "TXA"):
-		name = ""
-	elif(instruction['opcode'] == "TXS"):
-		name = ""
-	elif(instruction['opcode'] == "TXY"):
-		name = ""
-	elif(instruction['opcode'] == "TYA"):
-		name = ""
-	elif(instruction['opcode'] == "TYX"):
-		name = ""
-	elif(instruction['opcode'] == "TCD"):
-		name = ""
-	elif(instruction['opcode'] == "TCS"):
-		name = ""
-	elif(instruction['opcode'] == "TDC"):
-		name = ""
-	elif(instruction['opcode'] == "TSC"):
-		name = ""
-	elif(instruction['opcode'] == "XBA"):
-		name = ""
-	elif(instruction['opcode'] == "XCE"):
-		name = ""
+	elif(instruction['mnemonic'] == "ASL"):
+		name = "Arithmetic Shift Left"
+	elif(instruction['mnemonic'] == "LSR"):
+		name = "Logical Shift Right"
+	elif(instruction['mnemonic'] == "ROL"):
+		name = "Rotate Left"
+	elif(instruction['mnemonic'] == "ROR"):
+		name = "Rotate Right"
+	elif(instruction['mnemonic'] == "BCC"):
+		name = "Branch if Carry Clear"
+	elif(instruction['mnemonic'] == "BCS"):
+		name = "Branch if Carry Set"
+	elif(instruction['mnemonic'] == "BEQ"):
+		name = "Branch if Equal"
+	elif(instruction['mnemonic'] == "BMI"):
+		name = "Branch if Minus"
+	elif(instruction['mnemonic'] == "BNE"):
+		name = "Branch if Not Equal"
+	elif(instruction['mnemonic'] == "BPL"):
+		name = "Branch if Plus"
+	elif(instruction['mnemonic'] == "BRA"):
+		name = "Branch Always"
+	elif(instruction['mnemonic'] == "BVC"):
+		name = "Branch if Overflow Clear"
+	elif(instruction['mnemonic'] == "BVS"):
+		name = "Branch if Overflow Set"
+	elif(instruction['mnemonic'] == "BRL"):
+		name = "Branch Long"
+	elif(instruction['mnemonic'] == "JMP"):
+		name = "Jump"
+	elif(instruction['mnemonic'] == "JSL"):
+		name = "Jump to Subroutine Long"
+	elif(instruction['mnemonic'] == "JSR"):
+		name = "Jump to Subroutine"
+	elif(instruction['mnemonic'] == "RTL"):
+		name = "Return from Subroutine Long"
+	elif(instruction['mnemonic'] == "RTS"):
+		name = "Return from Subroutine"
+	elif(instruction['mnemonic'] == "BRK"):
+		name = "Breakpoint"
+	elif(instruction['mnemonic'] == "COP"):
+		name = "CoProcessor"
+	elif(instruction['mnemonic'] == "RTI"):
+		name = "Return from Interrupt"
+	elif(instruction['mnemonic'] == "CLC"):
+		name = "Clear Carry"
+	elif(instruction['mnemonic'] == "CLD"):
+		name = "Clear Decimal Mode"
+	elif(instruction['mnemonic'] == "CLI"):
+		name = "Clear Interrupt Disable"
+	elif(instruction['mnemonic'] == "CLV"):
+		name = "Clear Overflow"
+	elif(instruction['mnemonic'] == "SEV"):
+		name = "Set Overflow"
+	elif(instruction['mnemonic'] == "SED"):
+		name = "Set Decimal Mode"
+	elif(instruction['mnemonic'] == "SEI"):
+		name = "Set Interrupt Disable"
+	elif(instruction['mnemonic'] == "REP"):
+		name = "Reset Processor Status Bits"
+	elif(instruction['mnemonic'] == "SEP"):
+		name = "Set Processor Status Bits"
+	elif(instruction['mnemonic'] == "LDA"):
+		name = "Load Accumulator"
+	elif(instruction['mnemonic'] == "LDX"):
+		name = "Load X register"
+	elif(instruction['mnemonic'] == "LDY"):
+		name = "Load Y register"
+	elif(instruction['mnemonic'] == "STA"):
+		name = "Store Accumulator"
+	elif(instruction['mnemonic'] == "STX"):
+		name = "Store X register"
+	elif(instruction['mnemonic'] == "STY"):
+		name = "Store Y register"
+	elif(instruction['mnemonic'] == "STZ"):
+		name = "Store Zero"
+	elif(instruction['mnemonic'] == "MVN"):
+		name = "Move Memory Negative"
+	elif(instruction['mnemonic'] == "MVP"):
+		name = "Move Memory Positive"
+	elif(instruction['mnemonic'] == "NOP"):
+		name = "No operation"
+	elif(instruction['mnemonic'] == "WDM"):
+		name = "William D. Mensch, Jr. (2 cycle NOP)"
+	elif(instruction['mnemonic'] == "PEA"):
+		name = "Push Effective Address"
+	elif(instruction['mnemonic'] == "PEI"):
+		name = "Push Effective Indirect Address"
+	elif(instruction['mnemonic'] == "PER"):
+		name = "Push Effective Relative Address"
+	elif(instruction['mnemonic'] == "PHA"):
+		name = "Push Accumulator"
+	elif(instruction['mnemonic'] == "PHX"):
+		name = "Push X register"
+	elif(instruction['mnemonic'] == "PHY"):
+		name = "Push Y register"
+	elif(instruction['mnemonic'] == "PLA"):
+		name = "Pull Accumulator"
+	elif(instruction['mnemonic'] == "PLX"):
+		name = "Pull X register"
+	elif(instruction['mnemonic'] == "PLY"):
+		name = "Pull Y register"
+	elif(instruction['mnemonic'] == "PHB"):
+		name = "Push Data Bank Register"
+	elif(instruction['mnemonic'] == "PHD"):
+		name = "Push Direct Register"
+	elif(instruction['mnemonic'] == "PHK"):
+		name = "Push K Register"
+	elif(instruction['mnemonic'] == "PHP"):
+		name = "Push Processor Status Register"
+	elif(instruction['mnemonic'] == "PLB"):
+		name = "Pull Data Bank Register"
+	elif(instruction['mnemonic'] == "PLD"):
+		name = "Pull Direct Register"
+	elif(instruction['mnemonic'] == "PLP"):
+		name = "Pull Processor Status Register"
+	elif(instruction['mnemonic'] == "STP"):
+		name = "Stop The Clock"
+	elif(instruction['mnemonic'] == "WAI"):
+		name = "Wait For Interrupt"
+	elif(instruction['mnemonic'] == "TAX"):
+		name = "Transfer Accumulator to X Register"
+	elif(instruction['mnemonic'] == "TAY"):
+		name = "Transfer Accumulator to Y Register"
+	elif(instruction['mnemonic'] == "TSX"):
+		name = "Transfer Stack Pointer to X Register"
+	elif(instruction['mnemonic'] == "TXA"):
+		name = "Transfer X Register to Accumulator"
+	elif(instruction['mnemonic'] == "TXS"):
+		name = "Transfer X Register to Stack Pointer"
+	elif(instruction['mnemonic'] == "TXY"):
+		name = "Transfer X Register to Y Register"
+	elif(instruction['mnemonic'] == "TYA"):
+		name = "Transfer Y register to Accumulator"
+	elif(instruction['mnemonic'] == "TYX"):
+		name = "Transfer Y register to X register"
+	elif(instruction['mnemonic'] == "TCD"):
+		name = "Transfer C Accumulator to Direct Register"
+	elif(instruction['mnemonic'] == "TCS"):
+		name = "Transfer C Accumulator to Stack Pointer"
+	elif(instruction['mnemonic'] == "TDC"):
+		name = "Transfer Direct Register to C Accumulator"
+	elif(instruction['mnemonic'] == "TSC"):
+		name = "Transfer Stack Pointer to C Accumulator"
+	elif(instruction['mnemonic'] == "XBA"):
+		name = "Exchange B and A Accumulator"
+	elif(instruction['mnemonic'] == "XCE"):
+		name = "Exchange Carry and Emulation Flags"
 	else:
-		raise ValueError(f"Invalid opcode! %s", instruction['opcode'])
+		raise ValueError(f"Invalid opcode! %s", instruction['mnemonic'])
+	
+	instruction['name'] = name
 
 
-#print("std::array<INSTRUCTION_T, 256> instructions = {")
-#for(instruction in raw_instruction_information):
-#	print("{.opcode = {opcode}, \n
-##ifndef DEBUG
-#	, .name = \"{name}\"
-##endif
-# }")
-#
-#print("};")
+print("std::array<INSTRUCTION_T, 256> instructions = {")
+for(idx, instruction in enumerate(raw_instruction_information)):
+	print(f"\t{{.opcode = {hex(idx)}, \n#ifndef DEBUG\n\t, .name = \"{instruction['name']}\",\n\t.mnemonic = \"{instruction['mnemonic']}\"\n#endif\n\}},")
+print("};")
