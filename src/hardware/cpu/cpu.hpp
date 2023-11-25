@@ -30,10 +30,6 @@ typedef struct {
 
 typedef struct {
 	std::uint8_t opcode;
-	std::uint8_t bytes;
-	bool bytes_adj_m;
-	bool bytes_adj_x;
-	std::uint8_t cycles;
 #ifdef DEBUG
 	std::string name;
 #endif
@@ -375,6 +371,41 @@ INSTRUCTION_T instructions[256] = {
 		, .name = "William D. Mensch, Jr (Implied)"
 #endif
 	}, //2 cycle NOP (WDM) (Immediate)
+	{.opcode = 0x43, .bytes = 2, .bytes_adj_m = false, .bytes_adj_x = false, .cycles = 5 //5-m
+#ifdef DEBUG
+		, .name = "Exclusive OR with Accumulator (Stack, S)"
+#endif
+	}, //Exclusive OR with Accumulator (EOR ($32,S)) (Stack, S)
+	{.opcode = 0x44, .bytes = 3, .bytes_adj_m = false, .bytes_adj_x = false, .cycles = 7 //7
+#ifdef DEBUG
+		, .name = "Move Memory Positive (src, dest)"
+#endif
+	}, //Move memory (MVP #$12,#$34) (src,dest)
+	{.opcode = 0x45, .bytes = 2, .bytes_adj_m = false, .bytes_adj_x = false, .cycles = 4 //4-m+w
+#ifdef DEBUG
+		, .name = "Exclusive OR with Accumulator (Direct)"
+#endif
+	}, //Exclusive OR with Accumulator (EOR $10) (Direct)
+	{.opcode = 0x46, .bytes = 2, .bytes_adj_m = false, .bytes_adj_x = false, .cycles = 7 //7-2*m+w
+#ifdef DEBUG
+		, .name = "Logical Shift Right (Direct)"
+#endif
+	}, //Logical Shift Right (LSR $10) (Direct)
+	{.opcode = 0x47, .bytes = 2, .bytes_adj_m = false, .bytes_adj_x = false, .cycles = 7 //7-m+w
+#ifdef DEBUG
+		, .name = "Exclusive OR with Accumulator ([Direct])"
+#endif
+	}, //Exclusive OR with Accumulator (EOR [$10]) ([Direct])
+	{.opcode = 0x48, .bytes = 1, .bytes_adj_m = false, .bytes_adj_x = false, .cycles = 4 //4-m
+#ifdef DEBUG
+		, .name = "Exclusive OR with Accumulator ([Direct])"
+#endif
+	}, //Exclusive OR with Accumulator (EOR [$10]) ([Direct])
+	
+	
 };
+
+
+
 
 #endif
