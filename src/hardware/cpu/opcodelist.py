@@ -44,8 +44,8 @@ for matchNum, match in enumerate(matches, start=1):
 	raw_instruction_information.append(instruction)
 raw_instruction_information = sorted(raw_instruction_information, key=lambda x: x['opcode'])
 
-print("//Information extracted: {}", [x['opcode'] for x in raw_instruction_information_schema.validate(raw_instruction_information)])
-print("//Number of extracted instructions: ", len(raw_instruction_information))
+#print("//Information extracted: {}", [x['opcode'] for x in raw_instruction_information_schema.validate(raw_instruction_information)])
+#print("//Number of extracted instructions: ", len(raw_instruction_information))
 
 for idx, entry in enumerate(raw_instruction_information):
 	if(idx == 255):
@@ -114,7 +114,7 @@ for idx, instruction in enumerate(raw_instruction_information):
 byte_counts = set()
 for instruction in raw_instruction_information:
 	byte_counts.add(instruction['cycles'])
-print(byte_counts)
+#print(byte_counts)
 
 for idx, instruction in enumerate(raw_instruction_information):
 	name = ""
@@ -124,9 +124,9 @@ for idx, instruction in enumerate(raw_instruction_information):
 		name = "Subtract with carry"
 	elif(instruction['mnemonic'] == "CMP"):
 		name = "Compare to accumulator"
-	elif(instruction['mnemonic'] == "CMX"):
+	elif(instruction['mnemonic'] == "CPX"):
 		name = "Compare to X"
-	elif(instruction['mnemonic'] == "CMY"):
+	elif(instruction['mnemonic'] == "CPY"):
 		name = "Compare to Y"
 	elif(instruction['mnemonic'] == "DEC"):
 		name = "Decrement accumulator"
@@ -204,8 +204,8 @@ for idx, instruction in enumerate(raw_instruction_information):
 		name = "Clear Interrupt Disable"
 	elif(instruction['mnemonic'] == "CLV"):
 		name = "Clear Overflow"
-	elif(instruction['mnemonic'] == "SEV"):
-		name = "Set Overflow"
+	elif(instruction['mnemonic'] == "SEC"):
+		name = "Set Carry"
 	elif(instruction['mnemonic'] == "SED"):
 		name = "Set Decimal Mode"
 	elif(instruction['mnemonic'] == "SEI"):
@@ -305,8 +305,7 @@ for idx, instruction in enumerate(raw_instruction_information):
 	
 	instruction['name'] = name
 
-
-print("std::array<INSTRUCTION_T, 256> instructions = {")
-for(idx, instruction in enumerate(raw_instruction_information)):
-	print(f"\t{{.opcode = {hex(idx)}, \n#ifndef DEBUG\n\t, .name = \"{instruction['name']}\",\n\t.mnemonic = \"{instruction['mnemonic']}\"\n#endif\n\}},")
-print("};")
+print("const std::array<INSTRUCTION_T, 256> CPU_65C816_instructions = {{")
+for idx, instruction in enumerate(raw_instruction_information):
+	print(f"\t{{.opcode = {hex(idx)}\n#ifdef DEBUG\n\t, .name = \"{instruction['name']}\",\n\t.mnemonic = \"{instruction['mnemonic']}\"\n#endif\n\t}}, //{instruction['name']} | {instruction['mode_clean']} |  ({instruction['example']}) Length: ({instruction['length']}) Cycles: ({instruction['cycles']})")
+print("}};")

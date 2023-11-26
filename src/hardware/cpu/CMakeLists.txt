@@ -6,7 +6,7 @@ add_definitions(-std=c++17)
 add_definitions(-DDEBUG)
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(cpu_65c816 SHARED cpu.cpp cpu.hpp)
-set_target_properties(cpu_65c816 PROPERTIES PUBLIC_HEADER cpu.hpp)
+add_library(cpu_65C816 SHARED cpu_65C816.cpp cpu_65C816.hpp cpu_65C816_instruction_set.cpp cpu_65C816_instruction_set.hpp)
+set_target_properties(cpu_65C816 PROPERTIES PUBLIC_HEADER cpu_65C816.hpp)
 
-target_include_directories(cpu_65c816 PRIVATE .)
+target_include_directories(cpu_65C816 PRIVATE ${CMAKE_CURRENT_LIST_DIR})
