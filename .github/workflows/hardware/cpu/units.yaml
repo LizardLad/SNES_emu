@@ -1,0 +1,11 @@
+name: "CPU Tests"
+description: "Runs all unit tests for the 65c816 CPU"
+runs:
+  using: "composite"
+  steps: 
+  -name: Generate cmake files
+  run: mkdir build && cd build && cmake ..
+  -name: Build the project
+  run: make
+  -name: Run tests
+  run: src/hardware/cpu/tests/cpu_loop
