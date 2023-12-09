@@ -10,6 +10,8 @@ runs:
       working-directory: ./build
       run: cmake ..
     - name: Build the project
+      working-directory: ./build
       run: make
     - name: Run tests
-      run: src/hardware/cpu/tests/cpu_loop
+      working-directory: ./build/src/hardware/cpu/tests
+      run: cpu_loop
