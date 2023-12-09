@@ -18,4 +18,4 @@ runs:
     - name: Run tests
       working-directory: ./build/src/hardware/cpu/tests
       shell: bash
-      run: cpu_loop
+      run: cpu_loop_test
