@@ -4,6 +4,8 @@
 #include <cstdint>
 #include <string>
 
+#include <mem.hpp>
+
 struct CPU_65C816_Accumulator_substructure {
 	std::uint8_t A;
 	std::uint8_t B;
@@ -58,6 +60,7 @@ private:
 
 public:
 	void step(void);
+	void attach_memory(MEM mem);
 };
 
 typedef struct {
