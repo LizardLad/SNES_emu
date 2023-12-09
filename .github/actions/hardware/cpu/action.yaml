@@ -5,13 +5,17 @@ runs:
   steps:
     - name: Create build directory
       working-directory: .
+      shell: bash
       run: mkdir build
     - name: Generate cmake files
       working-directory: ./build
+      shell: bash
       run: cmake ..
     - name: Build the project
       working-directory: ./build
+      shell: bash
       run: make
     - name: Run tests
       working-directory: ./build/src/hardware/cpu/tests
+      shell: bash
       run: cpu_loop
