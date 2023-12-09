@@ -3,10 +3,9 @@ description: "Runs all unit tests for the 65c816 CPU"
 runs:
   using: "composite"
   steps:
-  - uses: actions/checkout@v2
-  -name: Generate cmake files
-  run: mkdir build && cd build && cmake ..
-  -name: Build the project
-  run: make
-  -name: Run tests
-  run: src/hardware/cpu/tests/cpu_loop
+    - name: Generate cmake files
+    run: mkdir build && cd build && cmake ..
+    - name: Build the project
+    run: make
+    - name: Run tests
+    run: src/hardware/cpu/tests/cpu_loop
