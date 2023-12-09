@@ -2,7 +2,8 @@ name: "CPU Tests"
 description: "Runs all unit tests for the 65c816 CPU"
 runs:
   using: "composite"
-  steps: 
+  steps:
+  - uses: actions/checkout@v2
   -name: Generate cmake files
   run: mkdir build && cd build && cmake ..
   -name: Build the project
