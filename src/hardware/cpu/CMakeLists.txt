@@ -11,4 +11,7 @@ set_target_properties(cpu_65C816 PROPERTIES PUBLIC_HEADER cpu_65C816.hpp)
 
 target_include_directories(cpu_65C816 PRIVATE ${CMAKE_CURRENT_LIST_DIR})
 
+target_link_libraries(cpu_65C816 PRIVATE snes_memory)
+target_include_directories(cpu_65C816 PRIVATE ${CMAKE_CURRENT_LIST_DIR}/../memory)
+
 add_subdirectory(tests)

@@ -8,5 +8,9 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(cpu_loop_test cpu_loop.cpp)
 
-target_link_libraries(cpu_loop_test PRIVATE cpu_65C816 snes_mem)
-target_include_directories(cpu_loop_test PRIVATE ${CMAKE_CURRENT_LIST_DIR}/..)
+target_link_libraries(cpu_loop_test PRIVATE cpu_65C816 snes_memory)
+target_include_directories(cpu_loop_test 
+	PRIVATE 
+	${PROJECT_SOURCE_DIR}/src/hardware/cpu 
+	${PROJECT_SOURCE_DIR}/src/hardware/memory 
+)
