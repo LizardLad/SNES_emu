@@ -1,11 +1,12 @@
-#ifndef SNES_MEM_HPP
-#define SNES_MEM_HPP
+#ifndef BASIC_MEM_HPP
+#define BASIC_MEM_HPP
 
 #include <cstdint>
+#include <vector>
 
 #include <mem.hpp>
 
-class SNES_MEM : public MEM {
+class BASIC_MEM : public MEM {
 	/*
 	This is a description of the SNES memory map. (https://wiki.superfamicom.org/memory-mapping)
 	The SNES has one 8-bit data bus and two address busses typically known as
@@ -90,9 +91,11 @@ class SNES_MEM : public MEM {
 
 	private:
 		//Memory map description
-
+        std::vector<uint8_t> mem;
+        uint32_t limit;
 
 	public:
+        BASIC_MEM();
 		//Read and Writes
 		bool cpu_write(uint32_t loc, uint8_t *data);
 		bool cpu_read(uint32_t loc, uint8_t *data);

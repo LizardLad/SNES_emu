@@ -2,7 +2,7 @@
 #include <cstdint>
 
 #include <cpu_65C816.hpp>
-#include <snes_mem.hpp>
+#include <basic_mem.hpp>
 
 const uint8_t loop_program[] = {
 	0x18, //CLC
@@ -10,19 +10,27 @@ const uint8_t loop_program[] = {
 	0xC2, 0x30, //REP #$30
 	0xA9, 0xFF, 0xFF, //LDA #$FFFF
 	0xC9, 0x00, 0x00, //CMP #$0000
-	0xD0, 0x03, //BNE #$03
+	0xF0, 0x03, //BEQ #$03
 	0x3A, //DEC
 	0x80, 0xF8, //BRA #$F8
-	0xD8, //STP
+	0xDB, //STP
 };
 
 int main(int argc, char **argv) {
 	CPU_65C816 cpu = CPU_65C816();
-	SNES_MEM mem = SNES_MEM();
+	BASIC_MEM mem = BASIC_MEM();
 
-	cpu.attach_memory(mem);
+    //std::getc(stdin);
 
-	std::cout << "Hello world! testing testing!\n";
+	cpu.attach_memory(&mem);
+    //Load the program into memory
+    for(int i = 0; i < sizeof(loop_program); i++) {
+        mem.cpu_write(i, (uint8_t *)(loop_program + i));
+    }
+
+    while(!cpu.waiting_reset) {
+        cpu.step();
+    }
 
 	return 0;
 }

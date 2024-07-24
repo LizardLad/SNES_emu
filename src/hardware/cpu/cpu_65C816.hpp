@@ -48,19 +48,51 @@ private:
 	std::uint16_t D; //Direct page register, used for direct page addressing modes. Holds the memory bank address of the data the CPU is accessing. (D/DP)
 	std::uint8_t B; //Program Bank, holds the bank address of all instruction fetches.
 	std::uint16_t PC; //Holds the memory address of the current CPU instruction
-	std::uint8_t P; //Holds various important flags, results of tests and 65816 processing states. See https://wiki.superfamicom.org/65816-reference.
+	std::uint8_t PB; //Holds various important flags, results of tests and 65816 processing states. See https://wiki.superfamicom.org/65816-reference.
 	std::uint16_t X; //General purpose index register
 	std::uint16_t Y; //General purpose index register
 	bool emulation_mode; //Used in conjunction with the P register (processor state)
-		
+	PROCESSOR_STATUS_REGISTER_T P;
+
 	//Current instruction information
 	std::uint8_t opcode;
 	std::uint8_t instruction[4];
 	std::uint8_t remaining_cycles;
 
+	//Memory bus information
+	MEM *memory;
+
 public:
+	//Interrupts
+	bool waiting_interrupt;
+	bool waiting_reset;
+
+	//Instructions
+	void x18(void);
+    void x1A(void);
+
+    void x3A(void);
+
+    void x80(void);
+
+    void xA9(void);
+
+	void xC2(void);
+    void xC9(void);
+
+    void xD0(void);
+    void xD8(void);
+    void xDB(void);
+
+    void xEA(void);
+
+    void xF0(void);
+	void xFB(void);
+
+    // Useful for the interface
+	void reset(void);
 	void step(void);
-	void attach_memory(MEM mem);
+	void attach_memory(MEM *mem);
 };
 
 typedef struct {

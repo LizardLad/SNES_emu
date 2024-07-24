@@ -1,6 +1,8 @@
+#include <iostream>
 #include <array>
 
 #include <cpu_65C816.hpp>
+#include <cpu_65C816_instruction_set.hpp>
 
 const std::array<INSTRUCTION_T, 256> CPU_65C816_instructions = {{
 	{.opcode = 0x0
@@ -147,7 +149,8 @@ const std::array<INSTRUCTION_T, 256> CPU_65C816_instructions = {{
 	.mnemonic = "ORA"
 #endif
 	}, //Bitwise OR with accumulator | Direct indirect indexed long Y |  (ORA [$10],Y) Length: (2) Cycles: (7-m+w)
-	{.opcode = 0x18
+	{.opcode = 0x18,
+    .impl = &CPU_65C816::x18
 #ifdef DEBUG
 	, .name = "Clear Carry",
 	.mnemonic = "CLC"
@@ -159,7 +162,8 @@ const std::array<INSTRUCTION_T, 256> CPU_65C816_instructions = {{
 	.mnemonic = "ORA"
 #endif
 	}, //Bitwise OR with accumulator | Absolute indexed Y |  (ORA $9876,Y) Length: (3) Cycles: (6-m-x+x*p)
-	{.opcode = 0x1a
+	{.opcode = 0x1a,
+    .impl = &CPU_65C816::x1A
 #ifdef DEBUG
 	, .name = "Increment accumulator",
 	.mnemonic = "INC"
@@ -351,7 +355,8 @@ const std::array<INSTRUCTION_T, 256> CPU_65C816_instructions = {{
 	.mnemonic = "AND"
 #endif
 	}, //Bitwise AND with accumulator | Absolute indexed Y |  (AND $9876,Y) Length: (3) Cycles: (6-m-x+x*p)
-	{.opcode = 0x3a
+	{.opcode = 0x3a,
+    .impl = &CPU_65C816::x3A
 #ifdef DEBUG
 	, .name = "Decrement accumulator",
 	.mnemonic = "DEC"
@@ -771,7 +776,8 @@ const std::array<INSTRUCTION_T, 256> CPU_65C816_instructions = {{
 	.mnemonic = "ADC"
 #endif
 	}, //Add with carry | Long indexed X |  (ADC $FEDCBA,X) Length: (4) Cycles: (6-m)
-	{.opcode = 0x80
+	{.opcode = 0x80,
+    .impl = &CPU_65C816::x80
 #ifdef DEBUG
 	, .name = "Branch Always",
 	.mnemonic = "BRA"
@@ -1017,7 +1023,8 @@ const std::array<INSTRUCTION_T, 256> CPU_65C816_instructions = {{
 	.mnemonic = "TAY"
 #endif
 	}, //Transfer Accumulator to Y Register | Implied |  (TAY) Length: (1) Cycles: (2)
-	{.opcode = 0xa9
+	{.opcode = 0xa9,
+    .impl = &CPU_65C816::xA9
 #ifdef DEBUG
 	, .name = "Load Accumulator",
 	.mnemonic = "LDA"
@@ -1167,7 +1174,8 @@ const std::array<INSTRUCTION_T, 256> CPU_65C816_instructions = {{
 	.mnemonic = "CMP"
 #endif
 	}, //Compare to accumulator | Direct Indexed Indirect (dir,X) |  (CMP ($10,X)) Length: (2) Cycles: (7-m+w)
-	{.opcode = 0xc2
+	{.opcode = 0xc2,
+    .impl = &CPU_65C816::xC2
 #ifdef DEBUG
 	, .name = "Reset Processor Status Bits",
 	.mnemonic = "REP"
@@ -1209,7 +1217,8 @@ const std::array<INSTRUCTION_T, 256> CPU_65C816_instructions = {{
 	.mnemonic = "INY"
 #endif
 	}, //Increment Y | Implied |  (INY) Length: (1) Cycles: (2)
-	{.opcode = 0xc9
+	{.opcode = 0xc9,
+    .impl = &CPU_65C816::xC9
 #ifdef DEBUG
 	, .name = "Compare to accumulator",
 	.mnemonic = "CMP"
@@ -1251,7 +1260,8 @@ const std::array<INSTRUCTION_T, 256> CPU_65C816_instructions = {{
 	.mnemonic = "CMP"
 #endif
 	}, //Compare to accumulator | Long |  (CMP $FEDBCA) Length: (4) Cycles: (6-m)
-	{.opcode = 0xd0
+	{.opcode = 0xd0,
+    .impl = &CPU_65C816::xD0
 #ifdef DEBUG
 	, .name = "Branch if Not Equal",
 	.mnemonic = "BNE"
@@ -1299,7 +1309,8 @@ const std::array<INSTRUCTION_T, 256> CPU_65C816_instructions = {{
 	.mnemonic = "CMP"
 #endif
 	}, //Compare to accumulator | Direct indirect indexed long Y |  (CMP [$10],Y) Length: (2) Cycles: (7-m+w)
-	{.opcode = 0xd8
+	{.opcode = 0xd8,
+    .impl = &CPU_65C816::xD8
 #ifdef DEBUG
 	, .name = "Clear Decimal Mode",
 	.mnemonic = "CLD"
@@ -1317,7 +1328,8 @@ const std::array<INSTRUCTION_T, 256> CPU_65C816_instructions = {{
 	.mnemonic = "PHX"
 #endif
 	}, //Push X register | Implied |  (PHX) Length: (1) Cycles: (4-x)
-	{.opcode = 0xdb
+	{.opcode = 0xdb,
+    .impl = &CPU_65C816::xDB
 #ifdef DEBUG
 	, .name = "Stop The Clock",
 	.mnemonic = "STP"
@@ -1407,7 +1419,8 @@ const std::array<INSTRUCTION_T, 256> CPU_65C816_instructions = {{
 	.mnemonic = "SBC"
 #endif
 	}, //Subtract with carry | Immediate |  (SBC #$54) Length: (3-m) Cycles: (3-m)
-	{.opcode = 0xea
+	{.opcode = 0xea,
+    .impl = &CPU_65C816::xEA
 #ifdef DEBUG
 	, .name = "No operation",
 	.mnemonic = "NOP"
@@ -1443,7 +1456,8 @@ const std::array<INSTRUCTION_T, 256> CPU_65C816_instructions = {{
 	.mnemonic = "SBC"
 #endif
 	}, //Subtract with carry | Long |  (SBC $FEDBCA) Length: (4) Cycles: (6-m)
-	{.opcode = 0xf0
+	{.opcode = 0xf0,
+    .impl = &CPU_65C816::xF0
 #ifdef DEBUG
 	, .name = "Branch if Equal",
 	.mnemonic = "BEQ"
@@ -1509,7 +1523,8 @@ const std::array<INSTRUCTION_T, 256> CPU_65C816_instructions = {{
 	.mnemonic = "PLX"
 #endif
 	}, //Pull X register | Implied |  (PLX) Length: (1) Cycles: (5-x)
-	{.opcode = 0xfb
+	{.opcode = 0xfb,
+    .impl = &CPU_65C816::xFB
 #ifdef DEBUG
 	, .name = "Exchange Carry and Emulation Flags",
 	.mnemonic = "XCE"
@@ -1540,3 +1555,143 @@ const std::array<INSTRUCTION_T, 256> CPU_65C816_instructions = {{
 #endif
 	}, //Subtract with carry | Long indexed X |  (SBC $FEDCBA,X) Length: (4) Cycles: (6-m)
 }};
+
+void CPU_65C816::x18(void) {
+	//CLC
+	//As only internal CPU state is affected can just nop for a cycle
+	this->remaining_cycles = 1;
+	this->P.c = 0;
+	return;
+}
+
+void CPU_65C816::x1A(void) {
+    this->remaining_cycles = 0;
+    this->A.val++;
+}
+
+void CPU_65C816::x3A(void) {
+    this->remaining_cycles = 0;
+    this->A.val--;
+}
+
+void CPU_65C816::x80(void) {
+    //BRA
+    this->remaining_cycles = 2;
+    std::int8_t b;
+    this->memory->cpu_read(this->PC, (uint8_t *)&b);
+    this->PC++;
+    this->PC += b;
+}
+
+void CPU_65C816::xA9(void) {
+    //LDA Immediate
+    this->remaining_cycles = 3 - this->P.m; //TODO respect m
+
+    std::uint8_t b1, b2;
+    this->memory->cpu_read(this->PC, &b1); this->PC++;
+    this->memory->cpu_read(this->PC, &b2); this->PC++;
+    this->A.val = (uint16_t)(b1 << 8) | (uint16_t)b2;
+}
+
+void CPU_65C816::xC2(void) {
+	//REP
+	this->remaining_cycles = 2;
+	std::uint8_t operand;
+	this->memory->cpu_read(this->PC, &operand);
+	this->PC++;
+
+    this->P.n = operand & 0b10000000;
+    this->P.v = operand & 0b01000000;
+    this->P.m = operand & 0b00100000;
+    this->P.x_b = operand & 0b00010000;
+    this->P.d = operand & 0b00001000;
+    this->P.i = operand & 0b00000100;
+    this->P.z = operand & 0b00000010;
+    this->P.c = operand & 0b00000001;
+
+    if(this->emulation_mode) {
+        this->P.m = 1;
+        this->P.x_b = 1;
+    }
+    return;
+}
+
+void CPU_65C816::xC9(void) {
+    this->remaining_cycles = 3 - !this->P.m;
+    std::uint8_t b1, b2;
+    std::uint16_t b;
+    this->memory->cpu_read(this->PC, &b1); this->PC++;
+    if(!this->P.m) {
+        this->memory->cpu_read(this->PC, &b2); this->PC++;
+        b = ((uint16_t)b1 << 8) | b2;
+    } else {
+        b = b1;
+    }
+    if(b == this->A.val) {
+        this->P.z = 0;
+    } else {
+        this->P.z = 1;
+    }
+    this->P.c = (b >= this->A.val);
+    this->P.n = (b < this->A.val);
+    return;
+}
+
+void CPU_65C816::xD0(void) {
+    if(this->P.z == 1) {
+        int8_t b;
+        this->memory->cpu_read(this->PC, (uint8_t *)&b); this->PC++;
+        bool page_jump = false;
+        if(this->PC % 256 > (this->PC+b) % 256) {
+            page_jump = true;
+        }
+        this->PC += b;
+        this->remaining_cycles = 2+1+this->emulation_mode*page_jump;
+        return;
+    }
+    this->PC++;
+    this->remaining_cycles = 2;
+}
+
+void CPU_65C816::xD8(void) {
+    //CLD
+    this->P.d = 0;
+    this->remaining_cycles = 2;
+}
+
+void CPU_65C816::xDB(void) {
+    //STP
+    this->waiting_reset = true;
+    this->remaining_cycles = 3;
+}
+
+void CPU_65C816::xEA(void) {
+    //NOP
+    this->remaining_cycles = 0;
+    return;
+}
+
+void CPU_65C816::xF0(void) {
+    if(this->P.z == 0) {
+        int8_t b;
+        this->memory->cpu_read(this->PC, (uint8_t *)&b); this->PC++;
+        bool page_jump = false;
+        if(this->PC % 256 > (this->PC+b) % 256) {
+            page_jump = true;
+        }
+        this->PC += b;
+        this->remaining_cycles = 2+1+this->emulation_mode*page_jump;
+        return;
+    }
+    this->PC++;
+    this->remaining_cycles = 2;
+}
+
+void CPU_65C816::xFB(void) {
+	//XCE
+	this->remaining_cycles = 1;
+	bool temp = this->P.c;
+	this->P.c = this->emulation_mode;
+	this->emulation_mode = temp;
+	return;
+}
